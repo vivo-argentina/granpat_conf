@@ -21,7 +21,7 @@
 {   'active': False,
     'author': 'Filoquin',
     'category': 'filoquin',
-    'data': ['point_of_sale.xml'],
+    'data': ['point_of_sale.xml','report_receipt.xml'],
     'demo_xml': [],
     'depends': ['point_of_sale'],
     'qweb' : ['static/src/xml/pos.xml',], 

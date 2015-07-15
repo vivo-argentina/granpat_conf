@@ -758,7 +758,6 @@ function openerp_pos_models(instance, module){ //module is instance.point_of_sal
                 } else {
                     total=this.quantity;
                 }
-                console.log(unit.category_id);
                 if (unit.category_id[1]=='Unidad'){
                     return  Math.ceil(total * 0.08333333333333333).toFixed(0) +  ' doc';
                 }
