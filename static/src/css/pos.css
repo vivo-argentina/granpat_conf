@@ -4,6 +4,37 @@
     font-family: 'Inconsolata';
     src: url(../fonts/Inconsolata.otf);
 }
+#ticket_top{
+    border-bottom: 2px solid #333;
+   margin-bottom: 23px;
+    padding-top: 5px;
+}
+#company_logo{
+    display: inline-block;
+    padding: 10px;
+    vertical-align: top;
+    height: 60px;
+    width: 200px;
+}
+
+#ticket_header{
+    display: inline-block;
+    padding: 10px;
+    vertical-align: top;
+    height: 60px;
+    width: 300px;
+    text-align: left;
+}
+#ticket_lines tr{
+    border-bottom: 1px dotted #333;
+
+}
+
+#ticket_lines td{
+    padding-bottom: 3px;
+    padding-top: 3px;
+
+}
 
 /* --- Styling of OpenERP Elements --- */
 .ui-dialog, .modal-dialog {
@@ -37,6 +68,8 @@ table {
 td {
     padding: 0px;
 }
+
+
 
 .oe_hidden{
     display: none !important;

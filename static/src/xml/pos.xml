@@ -6,24 +6,28 @@
 
     <t t-name="PosTicket">
         <div class="pos-sale-ticket">
-            
-            <div class="pos-center-align"><t t-esc="new Date().toString(Date.CultureInfo.formatPatterns.shortDate + ' ' +
-                Date.CultureInfo.formatPatterns.longTime)"/> <t t-esc="order.get('name')"/></div>
-            <br />
-            
 
-            <div id="company_logo" style="text-align:center;"><img t-att-src="'data:image/png;base64,'+ widget.pos.company.logo_web" height="58px" width="180px"/></div>
+            <div   id="ticket_top" >
+                <div id="company_logo">
+                <img  t-att-src="'data:image/png;base64,'+ widget.pos.company.logo_web" height="58px" width="180px"/> 
+                </div>
+                <div id="ticket_header">
 
-            <b>Sr: <t t-esc="order.get_client_name()"/> </b><br />
-            Atendido por: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/><br />
-            <br />
+                <t t-esc="new Date().toString(Date.CultureInfo.formatPatterns.shortDate + ' ' +
+                    Date.CultureInfo.formatPatterns.longTime)"/> <t t-esc="order.get('name')"/>
+                <br />
+                
+                <b>Sr: <t t-esc="order.get_client_name()"/> </b><br />
+                Atendido por: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/>
+                </div>
+            </div>
             <t t-if="widget.pos.config.receipt_header">
                 <div style='text-align:center'>
                     <t t-esc="widget.pos.config.receipt_header" />
                 </div>
                 <br />
             </t>
-            <table>
+            <table id="ticket_lines">
                 <colgroup>
                     <col width='18%' />
                     <col width='57%' />
