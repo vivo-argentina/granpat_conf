@@ -14,7 +14,7 @@
 
             <div id="company_logo" style="text-align:center;"><img t-att-src="'data:image/png;base64,'+ widget.pos.company.logo_web" height="58px" width="180px"/></div>
 
-            <t t-esc="widget.pos.company.name"/><br />
+            <b>Sr: <t t-esc="order.get_client_name()"/> </b><br />
             Atendido por: <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/><br />
             <br />
             <t t-if="widget.pos.config.receipt_header">

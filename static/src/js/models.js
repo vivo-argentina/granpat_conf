@@ -1217,11 +1217,17 @@ function openerp_pos_models(instance, module){ //module is instance.point_of_sal
             this.set('client',client);
         },
         get_client: function(){
+
             return this.get('client');
         },
+        
+        get_pipito: function(){
+            return 'viva peron';    
+        },
+        
         get_client_name: function(){
             var client = this.get('client');
-            return client ? client.name : "";
+            return client ? client.name : "Consumidor Final";
         },
         // the order also stores the screen status, as the PoS supports
         // different active screens per order. This method is used to
@@ -1239,6 +1245,7 @@ function openerp_pos_models(instance, module){ //module is instance.point_of_sal
         get_screen_data: function(key){
             return this.screen_data[key];
         },
+   
         // exports a JSON for receipt printing
         export_for_printing: function(){
             var orderlines = [];
@@ -1251,6 +1258,7 @@ function openerp_pos_models(instance, module){ //module is instance.point_of_sal
                 paymentlines.push(paymentline.export_for_printing());
             });
             var client  = this.get('client');
+            alert('hola');
             var cashier = this.pos.cashier || this.pos.user;
             var company = this.pos.company;
             var shop    = this.pos.shop;
@@ -1268,7 +1276,8 @@ function openerp_pos_models(instance, module){ //module is instance.point_of_sal
                 tax_details: this.getTaxDetails(),
                 change: this.getChange(),
                 name : this.getName(),
-                client: client ? client.name : null ,
+                client: client ? client.name : 'Consumidor Final' ,
+                cliente:  'Consumidor Final' ,
                 invoice_id: null,   //TODO
                 cashier: cashier ? cashier.name : null,
                 header: this.pos.config.receipt_header || '',
