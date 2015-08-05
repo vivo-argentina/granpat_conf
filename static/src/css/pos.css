@@ -1159,6 +1159,11 @@ td {
     * {
         color: black !important;
     }
+    body
+    {
+      margin: 25mm 25mm 25mm 25mm;
+    }
+
     .oe_leftbar,
     .pos .pos-topheader, 
     .pos .pos-leftpane, 
@@ -1177,6 +1182,7 @@ td {
         height: auto;
     }
     .pos{
+        
         background: white !important;
     }
     .pos .rightpane {
@@ -1201,13 +1207,14 @@ td {
         background: transparent !important;
     }
     .pos .pos-sale-ticket{
-        margin: 0;
+        margin: auto;
         padding: 10px;
         margin-left: auto !important;
         margin-right: auto !important;
-        border: 1px solid #000;
+        border: 1px double #000;
         font-size: 13px !important;
-        width: 700px !important;
+        width: 95% !important;
+
     }
 }
 
