@@ -31,6 +31,18 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
+class pos_order(osv.osv):
+    _name = "pos.order"
+    _inherit = "pos.order"
+    _columns = {
+        'statement_ids': fields.one2many('account.bank.statement.line', 'pos_statement_id', 'Payments',  readonly=False),
+
+        }
+
+    _defaults = {
+        }
+
+
 class pos_order_line(osv.osv):
     _name = "pos.order.line"
     _inherit = "pos.order.line"
