@@ -38,6 +38,22 @@
 
         <menuitem action="action_gp_account_bank_statement_line" id="menu_action_gp_account_bank_statement_line" parent="point_of_sale.menu_point_of_sale" sequence="3"/>
 
+ 
+    <record model="ir.ui.view" id="product_pricelist_price_tree_view">
+        <field name="name">pos.view.pos.order.tree.inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
+        <field name="arch" type="xml">
+            <data>
+            <field name="session_id" position="replace">
+                  <field name="total_endocenas"  sum="doc"/>
+                  <field name="total_enkilos"  sum="K"/>
+            </field>
+            </data> 
+        </field>
+    </record>
+
+  
 
     </data>
 </openerp>

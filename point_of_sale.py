@@ -34,8 +34,43 @@ _logger = logging.getLogger(__name__)
 class pos_order(osv.osv):
     _name = "pos.order"
     _inherit = "pos.order"
+
+    def _fnct_endocenas(self, cr, uid, ids, field_name, args, context=None):
+        if context is None:
+            context = {}
+        res = {}
+        for order in self.browse(cr, uid, ids, context=context):
+            total=0.0
+            for lines in order.lines :
+                if lines.product_id.uom_id.category_id.name == 'Unidad': 
+                    logging.info('producto %s',lines.product_id.uom_id.category_id.name)
+
+                    amount = lines.qty/lines.product_id.uom_id.factor
+
+                    total  = total + amount * lines.product_id.uos_id.factor
+            res[order.id] = total
+        return res
+
+    def _fnct_enkilos(self, cr, uid, ids, field_name, args, context=None):
+        if context is None:
+            context = {}
+        res = {}
+        for order in self.browse(cr, uid, ids, context=context):
+            total=0.0
+
+            for lines in order.lines :
+                if lines.product_id.uom_id.category_id.name == 'Peso': 
+                    logging.info('producto %s',lines.product_id.uom_id.category_id.name)
+
+                    amount = lines.qty/lines.product_id.uom_id.factor
+                    total  = total + amount * lines.product_id.uos_id.factor
+            res[order.id] = total
+        return res
+
     _columns = {
         'statement_ids': fields.one2many('account.bank.statement.line', 'pos_statement_id', 'Payments',  readonly=False),
+        'total_endocenas': fields.function(_fnct_endocenas, string='Docenas',type='float',),
+        'total_enkilos': fields.function(_fnct_enkilos, string='Kilos',type='float',),
 
         }
 
