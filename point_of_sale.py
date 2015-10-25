@@ -27,6 +27,8 @@ from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 from openerp.tools.float_utils import float_round, float_compare
 
+import dateutil
+
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -67,10 +69,41 @@ class pos_order(osv.osv):
             res[order.id] = total
         return res
 
+    def _fnct_price_huevos(self, cr, uid, ids, field_name, args, context=None):
+        if context is None:
+            context = {}
+        res = {}
+        for order in self.browse(cr, uid, ids, context=context):
+            total=0.0
+
+            for lines in order.lines :
+                if lines.product_id.uom_id.category_id.name == 'Unidad': 
+                    total  = total + lines.price_subtotal
+            res[order.id] = total
+        return res
+
+    def _fnct_price_alimento(self, cr, uid, ids, field_name, args, context=None):
+        if context is None:
+            context = {}
+        res = {}
+        for order in self.browse(cr, uid, ids, context=context):
+            total=0.0
+
+            for lines in order.lines :
+                if lines.product_id.uom_id.category_id.name == 'Peso': 
+                    total  = total + lines.price_subtotal
+            res[order.id] = total
+        return res
+
+
     _columns = {
         'statement_ids': fields.one2many('account.bank.statement.line', 'pos_statement_id', 'Payments',  readonly=False),
-        'total_endocenas': fields.function(_fnct_endocenas, string='Docenas',type='float',),
-        'total_enkilos': fields.function(_fnct_enkilos, string='Kilos',type='float',),
+        'total_endocenas': fields.function(_fnct_endocenas, string='Doc',type='float',),
+        'total_enkilos': fields.function(_fnct_enkilos, string='Kg',type='float',),
+
+        'price_huevos': fields.function(_fnct_price_huevos, string='$ H',type='float',),
+        'price_alimento': fields.function(_fnct_price_alimento, string='$ A',type='float',),
+
 
         }
 
