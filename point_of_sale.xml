@@ -11,6 +11,9 @@
                 <link href="/granpat_conf/static/src/css/pos.css" id="pos-stylesheet" rel="stylesheet"/>
             </xpath>
         </template>
+
+
+
         <record id="gp_account_bank_statement_line_tree" model="ir.ui.view">
             <field name="name">account.bank.statement.line.tree</field>
             <field name="model">account.bank.statement.line</field>
@@ -23,6 +26,7 @@
                 </tree>
             </field>
         </record>
+
         <record id="action_gp_account_bank_statement_line" model="ir.actions.act_window">
             <field name="name">Pagos</field>
             <field name="res_model">account.bank.statement.line</field>

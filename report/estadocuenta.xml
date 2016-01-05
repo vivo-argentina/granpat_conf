@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="granpat_conf.report_estadocuenta_doc">
+    <t t-call="report.external_layout">
+        <div class="page">
+            <div class="row">
+                <div class="col-xs-5 col-xs-offset-7">
+                    <span t-field="o.name"/><br/>
+                    <span t-raw="addresses[o.id].replace('\n\n', '\n').replace('\n', '&lt;br&gt;')"/>
+                     <span t-field="o.vat"/>
+                 </div>
+            </div>
+
+            <p>
+                Document: Customer account statement<br/>
+                Date: <span t-esc="formatLang(time.strftime('%Y-%m-%d'), date=True)"/><br/>
+                Customer ref: <span t-field="o.ref"/>
+            </p>
+
+            <p t-if="o.debt &gt; 0">
+                <t t-foreach="message(o, res_company)" t-as="messageline">
+                    <p t-esc="messageline"/>
+                </t>
+            </p>
+
+            <table class="table table-condensed" t-if="getLines(o)">
+                <thead>
+                    <tr>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center">Recibo</th>
+                        <th class="text-left">Tipo</th>
+                        <th class="text-left"></th>
+                        <th class="text-left"></th>
+                    </tr>
+                </thead>
+               
+     <field name="pos_statement_id"/>
+
+                <tr t-foreach="getLines(o)" t-as="line">
+                    <td>
+                        <span t-field="line.date"/>
+                    </td>
+                    <td>
+                        <span t-field="line.name"/>
+                    </td>
+                    <td>
+                        <span  t-field="line.journal_id"/>
+                    </td>
+                    <td>
+                        <span t-if="line.journal_id.debt == True" > <span   t-field="line.amount"/></span>
+                    </td>
+                    <td>
+                        <span t-if="  line.journal_id.debt != True" > <span t-field="line.amount"/></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><strong>Saldo</strong></td>
+             
+                    <td colspan="2"><span t-field="o.debt"/></td>
+                </tr>
+             </table>
+
+
+            <p t-if="o.debt &lt;= 0">
+                <strong>No se registra deuda.</strong>
+            </p>
+        </div>
+    </t>
+</template>
+
+<template id="report_estadocuenta">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'lang', 'granpat_conf.report_estadocuenta_doc')"/>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

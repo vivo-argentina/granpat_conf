@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report id="estadocuenta"
+            model="res.partner"
+            string="estado de cuenta"
+            report_type="qweb-pdf"
+            name="granpat_conf.report_estadocuenta"/>
+            
+    </data>
+</openerp>
